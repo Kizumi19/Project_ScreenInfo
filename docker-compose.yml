@@ -1,0 +1,34 @@
+version: '3'
+services:
+
+  apache-php:
+    image: php:7.3-apache
+    ports:
+      - "8080:80"
+    volumes:
+     - "./DocumentRoot:/var/www/html"
+    command: "/bin/sh -c 'docker-php-ext-install mysqli && exec apache2-foreground'"
+
+  mariadb:
+    image: mariadb:10.5.2
+    volumes: 
+      - "./database:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  php:
+    image: php:7.4-fpm
+    environment:
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT}
+      PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE}
+      PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE}
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8084:80"
+    environment:
+      PMA_HOST: mariadb
