@@ -2,9 +2,12 @@
 <html lang="es">
 
 <?php
+require_once(__DIR__ . '/connect.php');
+include(__DIR__ . '/connect.php');
 
-require_once(__DIR__ . '/config/connect.php');
-include(__DIR__ . '/config/connect.php');
+$sql = "SELECT * FROM doctors";
+$query = mysqli_query($connexioDB, $sql);
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -12,9 +15,9 @@ include(__DIR__ . '/config/connect.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- jQuery -->
-    <script src="/path/to/cdn/jquery.slim.min.js"></script>
+    <!-- <script src="/path/to/cdn/jquery.slim.min.js"></script> -->
     <!-- Load Validation JS -->
-    <script src="/path/to/bs4-form-validation.min.js"></script>
+    <!-- <script src="/path/to/bs4-form-validation.min.js"></script> -->
     <title>Panel Informatiu </title>
 </head>
 
@@ -40,13 +43,14 @@ include(__DIR__ . '/config/connect.php');
             </thead>
 
             <tbody>
-                <?php while($row = mysqli_fetch_array($query)); ?>
+                <?php while($row = mysqli_fetch_array($query)): ?>
                 <tr>
                     <th> <?= $row['name'] ?> </th>
                     <th> <?= $row['surname'] ?> </th>
                     <th> <?= $row['specialty_id'] ?> </th>
                     <th> <?= $row['location_id'] ?> </th>
                 </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
