@@ -4,6 +4,9 @@
 <?php
 require_once(__DIR__ . '/connect.php');
 include(__DIR__ . '/connect.php');
+include(__DIR__ . '/../inc/doctors.php');
+echo __DIR__ . '/../inc/doctors.php';
+echo getcwd();
 
 $sql = "SELECT * FROM doctors";
 $query = mysqli_query($connexioDB, $sql);
@@ -23,13 +26,14 @@ $query = mysqli_query($connexioDB, $sql);
 
 <body>
     <div>
-        <form action="">
+        <form action="/../inc/doctors.php" method="POST">
             <h1>Formulari</h1>
             <input type="text" name="Nom" placeholder="Nom">
             <input type="text" name="Cognom" placeholder="Cognom">
             <input type="text" name="id_especialitat" placeholder="Especialitat">
             <input type="text" name="id_localitzacio" placeholder="Localització">
 
+            <input type="submit" value="Afegeix doctor">
         </form>
     </div>
 
@@ -38,8 +42,8 @@ $query = mysqli_query($connexioDB, $sql);
             <thead>
                 <th>Nom</th>
                 <th>Cognom</th>
-                <th>especialització</th>
-                <th>localització</th>
+                <th>Especialització</th>
+                <th>Localització</th>
             </thead>
 
             <tbody>

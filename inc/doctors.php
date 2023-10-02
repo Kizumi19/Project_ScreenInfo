@@ -1,5 +1,8 @@
 <?php
 
+include(__DIR__ . '/connect.php');
+
+
 class Doctor{
 
     private $id;
@@ -19,12 +22,6 @@ class Doctor{
         $this->hidden = $hidden;
     }
     
-    /*public function CrearDoctor() {
-        include '../connect.php'
-
-        //$connexioDB = conn();
-    }
-*/
 }
 
 ?>
