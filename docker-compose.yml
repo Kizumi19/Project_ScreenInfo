@@ -6,7 +6,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - "./public:/var/www/html"  # Actualizado aquí
+
+      - "./public:/var/www/html"
     command: "/bin/sh -c 'docker-php-ext-install mysqli && exec apache2-foreground'"
 
   mariadb:
