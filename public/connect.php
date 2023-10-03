@@ -1,15 +1,13 @@
 <?php
-// Connexió a base de dades
-  $db_host="mariadb"; //si no es "mariadb".
-  $db="Screen"; //nom de la base de dades
-  $user="root"; //usuari BDD
-  $pass="root"; //pass BDD
-  
-  $connexioDB = mysqli_connect($db_host, $user, $pass, $db);
 
-  if ($connexioDB->connect_error) {
-    die("Connexió fallida: " . $connexioDB->connect_error);
-  }
+    $servername = "mariadb";
+    $database = "Screen";
+    $username = "root";
+    $password = "root";
 
-  return $connexioDB;
+    $conn = mysqli_connect($servername, $username, $password, $database);
+
+    if (!$conn) {
+        die("La connexió ha fallat:" . mysqli_connect_error());
+    }    
 ?>

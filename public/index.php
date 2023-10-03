@@ -2,12 +2,7 @@
 <html lang="es">
 
 <?php
-require_once(__DIR__ . '/connect.php');
 include(__DIR__ . '/connect.php');
-include(__DIR__ . '/../inc/doctors.php');
-echo __DIR__ . '/../inc/doctors.php';
-echo getcwd();
-
 $sql = "SELECT * FROM doctors";
 $query = mysqli_query($connexioDB, $sql);
 
@@ -26,14 +21,14 @@ $query = mysqli_query($connexioDB, $sql);
 
 <body>
     <div>
-        <form action="/../inc/doctors.php" method="POST">
+        <form action="createDoctor.php" method="POST">
             <h1>Formulari</h1>
             <input type="text" name="Nom" placeholder="Nom">
             <input type="text" name="Cognom" placeholder="Cognom">
             <input type="text" name="id_especialitat" placeholder="Especialitat">
             <input type="text" name="id_localitzacio" placeholder="Localització">
 
-            <input type="submit" value="Afegeix doctor">
+            <button id="submitBtn" type="button" value="Afegeix doctor">Afegeix doctor</button>
         </form>
     </div>
 
@@ -61,3 +56,23 @@ $query = mysqli_query($connexioDB, $sql);
 </body>
 
 </html>
+
+<script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "createDoctor.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    // Aquí capturas los datos del formulario para enviarlos
+    var formData = new FormData(document.querySelector("form"));
+    
+    xhr.send(new URLSearchParams(formData).toString());
+    
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            // Redirigir a index.php si deseas
+            window.location.href = "index.php";
+        }
+    };
+});
+</script>
