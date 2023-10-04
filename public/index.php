@@ -3,8 +3,9 @@
 
 <?php
 include(__DIR__ . '/connect.php');
+
 $sql = "SELECT * FROM doctors";
-$query = mysqli_query($connexioDB, $sql);
+$query = mysqli_query($conn, $sql);
 
 ?>
 <head>
@@ -21,14 +22,14 @@ $query = mysqli_query($connexioDB, $sql);
 
 <body>
     <div>
-        <form action="createDoctor.php" method="POST">
+        <form method="POST" action="createDoctor.php" >
             <h1>Formulari</h1>
             <input type="text" name="Nom" placeholder="Nom">
             <input type="text" name="Cognom" placeholder="Cognom">
             <input type="text" name="id_especialitat" placeholder="Especialitat">
             <input type="text" name="id_localitzacio" placeholder="Localització">
 
-            <button id="submitBtn" type="button" value="Afegeix doctor">Afegeix doctor</button>
+            <input id="submitBtn" type="submit" value="Send "></input>
         </form>
     </div>
 
@@ -57,7 +58,7 @@ $query = mysqli_query($connexioDB, $sql);
 
 </html>
 
-<script>
+<!-- <script>
 document.getElementById("submitBtn").addEventListener("click", function() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "createDoctor.php", true);
@@ -75,4 +76,4 @@ document.getElementById("submitBtn").addEventListener("click", function() {
         }
     };
 });
-</script>
+</script> -->
