@@ -33,3 +33,7 @@ services:
       - "8084:80"
     environment:
       PMA_HOST: mariadb
+
+  nodejs:
+    image: node:latest
+    tty: true

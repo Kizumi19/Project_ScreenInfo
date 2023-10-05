@@ -8,21 +8,25 @@ $sql = "SELECT * FROM doctors";
 $query = mysqli_query($conn, $sql);
 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- jQuery -->
-    <!-- <script src="/path/to/cdn/jquery.slim.min.js"></script> -->
-    <!-- Load Validation JS -->
-    <!-- <script src="/path/to/bs4-form-validation.min.js"></script> -->
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="src/style.css">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <title>Panel Informatiu </title>
 </head>
 
 <body>
     <div>
-        <form method="POST" action="createDoctor.php" >
+        <form method="POST" action="createDoctor.php">
             <h1>Formulari</h1>
             <input type="text" name="Nom" placeholder="Nom">
             <input type="text" name="Cognom" placeholder="Cognom">
@@ -34,46 +38,91 @@ $query = mysqli_query($conn, $sql);
     </div>
 
     <div>
-        <table>
-            <thead>
+        <table class="table">
+            <thead class="container px-4 text-center">
                 <th>Nom</th>
                 <th>Cognom</th>
                 <th>Especialització</th>
                 <th>Localització</th>
             </thead>
 
-            <tbody>
-                <?php while($row = mysqli_fetch_array($query)): ?>
-                <tr>
-                    <th> <?= $row['name'] ?> </th>
-                    <th> <?= $row['surname'] ?> </th>
-                    <th> <?= $row['specialty_id'] ?> </th>
-                    <th> <?= $row['location_id'] ?> </th>
-                </tr>
+            <tbody class="container px-4 text-center">
+                <?php while ($row = mysqli_fetch_array($query)): ?>
+                    <tr>
+                        <th>
+                            <?= $row['name'] ?>
+                        </th>
+                        <th>
+                            <?= $row['surname'] ?>
+                        </th>
+                        <th>
+                            <?= $row['specialty_id'] ?>
+                        </th>
+                        <th>
+                            <?= $row['location_id'] ?>
+                        </th>
+                    </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Crear metge
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="createDoctor" tabindex="-1" aria-labelledby="createDoctorLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="createDoctorLabel">Crea doctor/a</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Cos del modal amb el formulari -->
+                    <div class="modal-body">
+                    <!-- Nom -->
+                        <div class="form-floating mb-3">
+                            <input type="name" class="form-control" id="nameInput" placeholder="Nom de la persona">
+                            <label for="nameInput">Nom</label>
+                        </div>
+                    <!-- Cognom -->
+                        <div class="form-floating mb-3">
+                            <input type="surname" class="form-control" id="surnameInput"
+                                placeholder="Cognoms de la persona">
+                            <label for="surnameInput">Cognoms</label>
+                        </div>
+                    <!-- Especialitat -->
+                        <div class="form-floating mb-3">
+                            <input type="specialty" class="form-control" id="specialityInput"
+                                placeholder="Especialització de la persona">
+                            <label for="specialityInput">Especialització</label>
+                        </div>
+                    <!-- Localització  -->
+                        <div class="form-floating consulta-div">
+                            <select class="form-select" id="plantaSelect" aria-label="Floating label select consultation's doctor">
+                                <option selected>Selecciona la planta</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <label for="plantaSelect">Planta de la consulta</label>
+                        </div>
+                    <!-- Consulta  -->
+                    <div class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
+                            <input type="specialty" class="form-control" id="specialityInput"
+                                placeholder="Consulta de la persona">
+                            <label for="specialityInput">Número de la consulta</label>
+                        </div>
+                    <!-- Tancar / Afegir canvis  -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tanca</button>
+                        <button type="button" class="btn btn-primary">Afegeix</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
-
 </html>
-
-<!-- <script>
-document.getElementById("submitBtn").addEventListener("click", function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "createDoctor.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    
-    // Aquí capturas los datos del formulario para enviarlos
-    var formData = new FormData(document.querySelector("form"));
-    
-    xhr.send(new URLSearchParams(formData).toString());
-    
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            // Redirigir a index.php si deseas
-            window.location.href = "index.php";
-        }
-    };
-});
-</script> -->
