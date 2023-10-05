@@ -6,7 +6,6 @@ include(__DIR__ . '/connect.php');
 
 $sql = "SELECT * FROM doctors";
 $query = mysqli_query($conn, $sql);
-
 ?>
 
 <head>
@@ -16,7 +15,8 @@ $query = mysqli_query($conn, $sql);
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="src/style.css">
+    <link rel="stylesheet" type="text/css" href="src/style.css">
+
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -57,6 +57,7 @@ $query = mysqli_query($conn, $sql);
                         </th>
                         <th>
                             <?= $row['specialty_id'] ?>
+
                         </th>
                         <th>
                             <?= $row['location_id'] ?>
@@ -71,11 +72,11 @@ $query = mysqli_query($conn, $sql);
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="createDoctor" tabindex="-1" aria-labelledby="createDoctorLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="createDoctorLabel">Crea doctor/a</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Crea doctor/a</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Cos del modal amb el formulari -->
@@ -92,10 +93,29 @@ $query = mysqli_query($conn, $sql);
                             <label for="surnameInput">Cognoms</label>
                         </div>
                     <!-- Especialitat -->
-                        <div class="form-floating mb-3">
-                            <input type="specialty" class="form-control" id="specialityInput"
-                                placeholder="Especialització de la persona">
-                            <label for="specialityInput">Especialització</label>
+                    <?php
+                    // Vull que recorri totes les id de les especialitzacions,
+                    // guardar-les en un array i passar-les de número id a lletres
+
+                    for ($i = 1; $i <= 10; $i++){ // Pasar de hardcode a softcode
+
+                    }
+                    $valor = array(
+
+                    );
+                    $specialty = "SELECT type_specialty FROM `specialties` WHERE id = 1";
+                    $query = mysqli_query($conn, $sql);
+                    ?>
+                    <div class="form-floating consulta-div">
+                            <select class="form-select" id="specialtySelect" aria-label="Floating label select specialty's doctor">
+                                <option selected>Selecciona l'especialització</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <label for="plantaSelect">Planta de la consulta</label>
                         </div>
                     <!-- Localització  -->
                         <div class="form-floating consulta-div">
