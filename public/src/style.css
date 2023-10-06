@@ -6,3 +6,7 @@
     border-collapse: separate;
     border-spacing: 5px;
 }
+.imatge-visualitzar {
+    max-width: 100%;
+    max-height: 200px;
+}
