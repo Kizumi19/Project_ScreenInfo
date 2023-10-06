@@ -49,10 +49,10 @@ switch($request) {
         <div class="card-body">
             <h5 class="card-title">Mostrar informació per la pantalla</h5>
             <p class="card-text">Mostrar als pacients la informació dels doctors (Especialització, nom i cognoms, planta i consulta).</p>
-            <a href="#" class="btn btn-primary">Visualitzar</a>
+            <a href="#" id="originalButton" class="btn btn-primary">Visualitzar</a>
             <button class="btn btn-primary" type="button" disabled style="display:none;">
             <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-            <span role="status">Carregant dades...</span>
+            <span role="status" >Carregant dades...</span>
             </button>
 
         </div>
