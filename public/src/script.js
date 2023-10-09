@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 loadingButton.style.display = "none";
             }
             if (originalButton) {
-                originalButton.style.display = "inline-block"; // O el valor original que tenía
+                originalButton.style.display = "inline-block"; 
             }
         }
     });
@@ -28,13 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Mostra el botó 'Carregant dades...'
         document.querySelector("button[disabled]").style.display = "inline-block";
-
+        setTimeout(function () {
+            clearTimeout(loadingTimeout);
+            window.location.href = "formDoctor.php";
+        }, 5500);
     });
 
-    setTimeout(function () {
-        clearTimeout(loadingTimeout);
-        window.location.href = "formDoctor.php";
-    }, 5500);
+
 
     // Veure si arriva el .js al index.php
     console.log("Script cargado correctamente");
