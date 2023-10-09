@@ -33,8 +33,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5500);
     });
 
-
-
     // Veure si arriva el .js al index.php
     console.log("Script cargado correctamente");
 });
+
+$(document).ready(function() {
+    // Agafar la URL en la que estem
+    var url = window.location.href;
+    
+    // Eliminar 'active' de tots els items de la navegació
+    $('.nav-item .nav-link').removeClass('active');
+    
+    // Aplicar 'active' a l'enllaç que coincideix amb l'URL
+    $('.nav-item a').filter(function() {
+        return this.href === url;
+    }).addClass('active');
+});
+
+  

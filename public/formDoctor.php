@@ -3,7 +3,7 @@
 
 <?php
 include(__DIR__ . '/connect.php');
-
+include(__DIR__ . '/header.php');
 $sql = "SELECT * FROM doctors";
 $query = mysqli_query($conn, $sql);
 ?>
@@ -25,6 +25,9 @@ $query = mysqli_query($conn, $sql);
 </head>
 
 <body>
+    <header>
+
+    </header>
     <div>
         <form method="POST" action="createDoctor.php">
             <h1>Formulari</h1>
@@ -144,5 +147,10 @@ $query = mysqli_query($conn, $sql);
             </div>
         </div>
     </div>
+    
 </body>
+<?php
+include(__DIR__ . '/footer.php');
+
+?>
 </html>
