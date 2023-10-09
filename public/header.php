@@ -32,7 +32,7 @@ $request = $_SERVER["REQUEST_URI"];
     <header>
         <div class="container  class=" grid gap-0 column-gap-3"">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <a href="/index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <img src="src/logoHCA.jpeg" style="" class="bi me-2" width="70" height="62"></img>
                     <span class="fs-4"> Pantalla principal </span>
                 </a>
