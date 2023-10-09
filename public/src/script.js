@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2000);
 
     clearTimeout(timeoutId);
-    //console.log(`Tiempo de espera ID ${timeoutId} ha sido limpiado`);
     let loadingTimeout;
 
     document.querySelector(".btn-primary").addEventListener("click", function () {
