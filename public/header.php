@@ -30,7 +30,7 @@ $request = $_SERVER["REQUEST_URI"];
 
 <body>
     <header>
-        <div class="container  class=" grid gap-0 column-gap-3"">
+        <div class="container grid gap-0 column-gap-3">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                 <a href="/index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <img src="src/logoHCA.jpeg" style="" class="bi me-2" width="70" height="62"></img>
@@ -45,6 +45,38 @@ $request = $_SERVER["REQUEST_URI"];
         </div>
     </header>
 
-
-
 </body>
+
+<script>
+// Adaptar el títol de la pestanya
+$(document).ready(function() {
+    var url = window.location.href;
+
+    if (url.includes("index")) {
+        $("title").text("Inici - Panel Informatiu");
+    } else if (url.includes("FQA")) {
+        $("title").text("Preguntes freqüents");
+    } else if (url.includes("info")) {
+        $("title").text("Sobre l'APP");
+    } else {
+        $("title").text("Panel informatiu");
+    }
+});
+// Adaptar el  de la pestanya
+
+$(document).ready(function() {
+    var url = window.location.href;
+    if (url.includes("index")) {
+        $('.fs-4').text("Inici - Panel Informatiu");
+    } else if (url.includes("FQA")) {
+        $('.fs-4').text("Preguntes freqüents");
+    } else if (url.includes("info")) {
+        $('.fs-4').text("Sobre l'APP");
+    } else if (url.includes("formDoctor")){
+        $('.fs-4').text("Apartat edició")
+    } else {
+        $('.fs-4').text("Panel informatiu");
+    }
+});
+
+</script>

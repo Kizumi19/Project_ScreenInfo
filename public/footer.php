@@ -12,7 +12,6 @@
         </div>
         <!-- Left -->
     </section>
-    <!-- Section: Social media -->
 
     <!-- Section: Links  -->
     <section class="">
