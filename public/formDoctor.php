@@ -4,8 +4,15 @@
 <?php
 include(__DIR__ . '/connect.php');
 include(__DIR__ . '/header.php');
-$sql = "SELECT * FROM doctors";
+mysqli_set_charset($conn, "utf8mb4");
+
+$sql = "SELECT doctors.name, doctors.surname, specialties.type_specialty, doctors.location_id
+FROM doctors
+LEFT JOIN doctor_specialty ON doctors.id = doctor_specialty.doctor_id
+LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id";
+
 $query = mysqli_query($conn, $sql);
+
 ?>
 
 <head>
@@ -50,7 +57,7 @@ $query = mysqli_query($conn, $sql);
             </thead>
 
             <tbody class="container px-4 text-center">
-                <?php while ($row = mysqli_fetch_array($query)): ?>
+                <?php while ($row = mysqli_fetch_array($query)):  ?>
                     <tr>
                         <th>
                             <?= $row['name'] ?>
@@ -59,7 +66,8 @@ $query = mysqli_query($conn, $sql);
                             <?= $row['surname'] ?>
                         </th>
                         <th>
-                            <?= $row['specialty_id'] ?>
+
+                            <?= $row['type_specialty'] ?>
 
                         </th>
                         <th>
@@ -67,6 +75,7 @@ $query = mysqli_query($conn, $sql);
                         </th>
                     </tr>
                 <?php endwhile; ?>
+
             </tbody>
         </table>
         <!-- Button trigger modal -->
@@ -147,7 +156,34 @@ $query = mysqli_query($conn, $sql);
             </div>
         </div>
     </div>
-    
+    <!-- <table class="table">
+            <thead class="container px-4 text-center">
+                <th>Nom</th>
+                <th>Cognom</th>
+                <th>Especialització</th>
+                <th>Localització</th>
+            </thead>
+
+            <tbody class="container px-4 text-center">
+                <?php while ($row = mysqli_fetch_array($query2)): ?>
+                    <tr>
+                        <th>
+                            <?= $row['type_specialty'] ?>
+                        </th>
+                        <th>
+                            <?= $row['surname'] ?>
+                        </th>
+                        <th>
+                            <?= $row['specialty_id'] ?>
+
+                        </th>
+                        <th>
+                            <?= $row['location_id'] ?>
+                        </th>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table> -->
 </body>
 <?php
 include(__DIR__ . '/footer.php');
