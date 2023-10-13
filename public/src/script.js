@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("pageshow", function (event) {
-    if (url.includes("index.php")) {
+    var url = window.location.href;
+    if (url.includes("index")) {
     const loadingButton = document.querySelector("button[disabled]");
     const originalButton = document.querySelector("#originalButton");
     // Comprovem si la pàgina va cargando desde la caché

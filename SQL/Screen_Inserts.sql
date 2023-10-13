@@ -1,4 +1,3 @@
--- Insertar especialidades adicionales
 INSERT INTO `specialties` (`type_specialty`, `created_at`, `hidden`)
 VALUES 
 ('Neurología', NOW(), false),
@@ -7,7 +6,6 @@ VALUES
 ('Dermatología', NOW(), false),
 ('Gastroenterología', NOW(), false);
 
--- Insertar ubicaciones adicionales
 INSERT INTO `locations` (`floor`, `room`, `created_at`, `hidden`)
 VALUES 
 ('1', 102, NOW(), false),
@@ -16,25 +14,30 @@ VALUES
 ('3', 301, NOW(), false),
 ('3', 302, NOW(), false);
 
--- Insertar doctores adicionales
-INSERT INTO `doctors` (`name`, `surname`, `specialty_id`, `location_id`, `created_at`, `hidden`)
+INSERT INTO `doctors` (`name`, `surname`, `location_id`, `created_at`, `hidden`)
 VALUES 
-('Mary', 'Smith', 2, 2, NOW(), false),
-('James', 'Johnson', 3, 3, NOW(), false),
-('Patricia', 'Williams', 4, 4, NOW(), false),
-('Michael', 'Brown', 5, 5, NOW(), false),
-('Linda', 'Taylor', 5, 5, NOW(), false);
+('Mary', 'Smith', 2, NOW(), false),
+('James', 'Johnson', 3, NOW(), false),
+('Patricia', 'Williams', 4, NOW(), false),
+('Michael', 'Brown', 5, NOW(), false),
+('Linda', 'Taylor', 5, NOW(), false);
 
--- Insertar horarios adicionales
-INSERT INTO `schedules` (`doctor_id`, `shift`, `hidden`)
+INSERT INTO `doctor_specialty` (`doctor_id`, `specialty_id`, `created_at`, `hidden`)
 VALUES 
-(2, 'day', false),
-(3, 'afternoon', false),
-(4, 'day', false),
-(5, 'afternoon', false),
-(5, 'day', false);
+(1, 2, NOW(), false),
+(2, 3, NOW(), false),
+(3, 4, NOW(), false),
+(4, 5, NOW(), false),
+(5, 5, NOW(), false);
 
--- Insertar usuarios adicionales
+INSERT INTO `schedules` (`doctor_id`, `day`, `shift`, `created_at`, `hidden`)
+VALUES 
+(1, 'Monday', 'morning', NOW(), false),
+(2, 'Tuesday', 'afternoon', NOW(), false),
+(3, 'Wednesday', 'morning', NOW(), false),
+(4, 'Thursday', 'afternoon', NOW(), false),
+(5, 'Friday', 'morning', NOW(), false);
+
 INSERT INTO `users` (`username`, `role`, `created_at`, `hidden`)
 VALUES 
 ('viewer1', 'viewer', NOW(), false),

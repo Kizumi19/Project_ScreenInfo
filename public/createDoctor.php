@@ -29,8 +29,11 @@ if($result) {
 
 
 // 1. Crear una altra sentència
+
 // 1.1 Recollir les dades del formulari
+
 // 1.2 Transformar els noms per les id ex; id_especulització (1 = dermatología)
+
 // 1.3 Repetir el mateix procés però amb localització
 
 $stmt->close();
