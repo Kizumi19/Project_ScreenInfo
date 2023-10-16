@@ -7,19 +7,19 @@ LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id
 LEFT JOIN locations ON doctors.location_id = locations.id
 ORDER BY `locations`.`floor` ASC";
 
-$sqlMorning = "SELECT doctors.name, doctors.surname, specialties.type_specialty, locations.floor, locations.room
-FROM doctors
-LEFT JOIN doctor_specialty ON doctors.id = doctor_specialty.doctor_id
-LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id
+$sqlMorning = "SELECT doctors.name, doctors.surname, specialties.type_specialty, doctors.location_id, locations.floor, locations.room FROM doctors 
+LEFT JOIN doctor_specialty ON doctors.id = doctor_specialty.doctor_id 
+LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id 
 LEFT JOIN locations ON doctors.location_id = locations.id
+LEFT JOIN schedules ON doctors.id = schedules.doctor_id
 WHERE schedules.shift = 'morning'
-ORDER BY `locations`.`floor` ASC";
+ORDER BY `locations`.`floor` ASC;";
 
-$sqlAfternoon = "SELECT doctors.name, doctors.surname, specialties.type_specialty, locations.floor, locations.room
-FROM doctors
-LEFT JOIN doctor_specialty ON doctors.id = doctor_specialty.doctor_id
-LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id
+$sqlAfternoon = "SELECT doctors.name, doctors.surname, specialties.type_specialty, doctors.location_id, locations.floor, locations.room FROM doctors 
+LEFT JOIN doctor_specialty ON doctors.id = doctor_specialty.doctor_id 
+LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id 
 LEFT JOIN locations ON doctors.location_id = locations.id
+LEFT JOIN schedules ON doctors.id = schedules.doctor_id
 WHERE schedules.shift = 'afternoon'
-ORDER BY `locations`.`floor` ASC"
+ORDER BY `locations`.`floor` ASC;"
 ?>
