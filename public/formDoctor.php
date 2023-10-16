@@ -4,14 +4,13 @@
 <?php
 include(__DIR__ . '/connect.php');
 include(__DIR__ . '/header.php');
+include(__DIR__ . '/select.php');
 mysqli_set_charset($conn, "utf8mb4");
 
-$sql = "SELECT doctors.name, doctors.surname, specialties.type_specialty, doctors.location_id
-FROM doctors
-LEFT JOIN doctor_specialty ON doctors.id = doctor_specialty.doctor_id
-LEFT JOIN specialties ON doctor_specialty.specialty_id = specialties.id";
-
 $query = mysqli_query($conn, $sql);
+$query2 = mysqli_query($conn, $sqlMorning);
+$query3 = mysqli_query($conn, $sqlAfternoon);
+
 
 ?>
 
@@ -47,17 +46,28 @@ $query = mysqli_query($conn, $sql);
         </form>
     </div>
 
-    <div>
-        <table class="table">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+                    Torn MATÍ i TARDE
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                <table class="table">
             <thead class="container px-4 text-center">
                 <th>Nom</th>
                 <th>Cognom</th>
                 <th>Especialització</th>
-                <th>Localització</th>
+                <th>Planta</th>
+                <th>Consulta</th>
             </thead>
 
             <tbody class="container px-4 text-center">
-                <?php while ($row = mysqli_fetch_array($query)):  ?>
+                <?php while ($row = mysqli_fetch_array($query)): ?>
                     <tr>
                         <th>
                             <?= $row['name'] ?>
@@ -71,7 +81,10 @@ $query = mysqli_query($conn, $sql);
 
                         </th>
                         <th>
-                            <?= $row['location_id'] ?>
+                            <?= $row['floor'] ?>
+                        </th>
+                        <th>
+                            <?= $row['room'] ?>
                         </th>
                     </tr>
                 <?php endwhile; ?>
@@ -93,33 +106,34 @@ $query = mysqli_query($conn, $sql);
                     </div>
                     <!-- Cos del modal amb el formulari -->
                     <div class="modal-body">
-                    <!-- Nom -->
+                        <!-- Nom -->
                         <div class="form-floating mb-3">
                             <input type="name" class="form-control" id="nameInput" placeholder="Nom de la persona">
                             <label for="nameInput">Nom</label>
                         </div>
-                    <!-- Cognom -->
+                        <!-- Cognom -->
                         <div class="form-floating mb-3">
                             <input type="surname" class="form-control" id="surnameInput"
                                 placeholder="Cognoms de la persona">
                             <label for="surnameInput">Cognoms</label>
                         </div>
-                    <!-- Especialitat -->
-                    <?php
-                    // Vull que recorri totes les id de les especialitzacions,
-                    // guardar-les en un array i passar-les de número id a lletres
+                        <!-- Especialitat -->
+                        <?php
+                        // Vull que recorri totes les id de les especialitzacions,
+                        // guardar-les en un array i passar-les de número id a lletres
+                        
+                        for ($i = 1; $i <= 10; $i++) { // Pasar de hardcode a softcode
+                        
+                        }
+                        $valor = array(
 
-                    for ($i = 1; $i <= 10; $i++){ // Pasar de hardcode a softcode
-
-                    }
-                    $valor = array(
-
-                    );
-                    $specialty = "SELECT type_specialty FROM `specialties` WHERE id = 1";
-                    $query = mysqli_query($conn, $sql);
-                    ?>
-                    <div class="form-floating consulta-div">
-                            <select class="form-select" id="specialtySelect" aria-label="Floating label select specialty's doctor">
+                        );
+                        $specialty = "SELECT type_specialty FROM `specialties` WHERE id = 1";
+                        $query = mysqli_query($conn, $sql);
+                        ?>
+                        <div class="form-floating consulta-div">
+                            <select class="form-select" id="specialtySelect"
+                                aria-label="Floating label select specialty's doctor">
                                 <option selected>Selecciona l'especialització</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
@@ -129,9 +143,10 @@ $query = mysqli_query($conn, $sql);
                             </select>
                             <label for="plantaSelect">Planta de la consulta</label>
                         </div>
-                    <!-- Localització  -->
+                        <!-- Localització  -->
                         <div class="form-floating consulta-div">
-                            <select class="form-select" id="plantaSelect" aria-label="Floating label select consultation's doctor">
+                            <select class="form-select" id="plantaSelect"
+                                aria-label="Floating label select consultation's doctor">
                                 <option selected>Selecciona la planta</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
@@ -141,22 +156,283 @@ $query = mysqli_query($conn, $sql);
                             </select>
                             <label for="plantaSelect">Planta de la consulta</label>
                         </div>
-                    <!-- Consulta  -->
-                    <div class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
+                        <!-- Consulta  -->
+                        <div class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
                             <input type="specialty" class="form-control" id="specialityInput"
                                 placeholder="Consulta de la persona">
                             <label for="specialityInput">Número de la consulta</label>
                         </div>
-                    <!-- Tancar / Afegir canvis  -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tanca</button>
-                        <button type="button" class="btn btn-primary">Afegeix</button>
+                        <!-- Tancar / Afegir canvis  -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tanca</button>
+                            <button type="button" class="btn btn-primary">Afegeix</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                    MATÍ
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                <table class="table">
+            <thead class="container px-4 text-center">
+                <th>Nom</th>
+                <th>Cognom</th>
+                <th>Especialització</th>
+                <th>Planta</th>
+                <th>Consulta</th>
+            </thead>
+
+            <tbody class="container px-4 text-center">
+                <?php while ($row = mysqli_fetch_array($query2)): ?>
+                    <tr>
+                        <th>
+                            <?= $row['name'] ?>
+                        </th>
+                        <th>
+                            <?= $row['surname'] ?>
+                        </th>
+                        <th>
+
+                            <?= $row['type_specialty'] ?>
+
+                        </th>
+                        <th>
+                            <?= $row['floor'] ?>
+                        </th>
+                        <th>
+                            <?= $row['room'] ?>
+                        </th>
+                    </tr>
+                <?php endwhile; ?>
+
+            </tbody>
+        </table>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Crear metge
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Crea doctor/a</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Cos del modal amb el formulari -->
+                    <div class="modal-body">
+                        <!-- Nom -->
+                        <div class="form-floating mb-3">
+                            <input type="name" class="form-control" id="nameInput" placeholder="Nom de la persona">
+                            <label for="nameInput">Nom</label>
+                        </div>
+                        <!-- Cognom -->
+                        <div class="form-floating mb-3">
+                            <input type="surname" class="form-control" id="surnameInput"
+                                placeholder="Cognoms de la persona">
+                            <label for="surnameInput">Cognoms</label>
+                        </div>
+                        <!-- Especialitat -->
+                        <?php
+                        // Vull que recorri totes les id de les especialitzacions,
+                        // guardar-les en un array i passar-les de número id a lletres
+                        
+                        for ($i = 1; $i <= 10; $i++) { // Pasar de hardcode a softcode
+                        
+                        }
+                        $valor = array(
+
+                        );
+                        $specialty = "SELECT type_specialty FROM `specialties` WHERE id = 1";
+                        $query = mysqli_query($conn, $sql);
+                        ?>
+                        <div class="form-floating consulta-div">
+                            <select class="form-select" id="specialtySelect"
+                                aria-label="Floating label select specialty's doctor">
+                                <option selected>Selecciona l'especialització</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <label for="plantaSelect">Planta de la consulta</label>
+                        </div>
+                        <!-- Localització  -->
+                        <div class="form-floating consulta-div">
+                            <select class="form-select" id="plantaSelect"
+                                aria-label="Floating label select consultation's doctor">
+                                <option selected>Selecciona la planta</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <label for="plantaSelect">Planta de la consulta</label>
+                        </div>
+                        <!-- Consulta  -->
+                        <div class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
+                            <input type="specialty" class="form-control" id="specialityInput"
+                                placeholder="Consulta de la persona">
+                            <label for="specialityInput">Número de la consulta</label>
+                        </div>
+                        <!-- Tancar / Afegir canvis  -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tanca</button>
+                            <button type="button" class="btn btn-primary">Afegeix</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
+                    TARDE
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                <table class="table">
+            <thead class="container px-4 text-center">
+                <th>Nom</th>
+                <th>Cognom</th>
+                <th>Especialització</th>
+                <th>Planta</th>
+                <th>Consulta</th>
+            </thead>
+
+            <tbody class="container px-4 text-center">
+                <?php while ($row = mysqli_fetch_array($query3)): ?>
+                    <tr>
+                        <th>
+                            <?= $row['name'] ?>
+                        </th>
+                        <th>
+                            <?= $row['surname'] ?>
+                        </th>
+                        <th>
+
+                            <?= $row['type_specialty'] ?>
+
+                        </th>
+                        <th>
+                            <?= $row['floor'] ?>
+                        </th>
+                        <th>
+                            <?= $row['room'] ?>
+                        </th>
+                    </tr>
+                <?php endwhile; ?>
+
+            </tbody>
+        </table>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Crear metge
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Crea doctor/a</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Cos del modal amb el formulari -->
+                    <div class="modal-body">
+                        <!-- Nom -->
+                        <div class="form-floating mb-3">
+                            <input type="name" class="form-control" id="nameInput" placeholder="Nom de la persona">
+                            <label for="nameInput">Nom</label>
+                        </div>
+                        <!-- Cognom -->
+                        <div class="form-floating mb-3">
+                            <input type="surname" class="form-control" id="surnameInput"
+                                placeholder="Cognoms de la persona">
+                            <label for="surnameInput">Cognoms</label>
+                        </div>
+                        <!-- Especialitat -->
+                        <?php
+                        // Vull que recorri totes les id de les especialitzacions,
+                        // guardar-les en un array i passar-les de número id a lletres
+                        
+                        for ($i = 1; $i <= 10; $i++) { // Pasar de hardcode a softcode
+                        
+                        }
+                        $valor = array(
+
+                        );
+                        $specialty = "SELECT type_specialty FROM `specialties` WHERE id = 1";
+                        $query = mysqli_query($conn, $sql);
+                        ?>
+                        <div class="form-floating consulta-div">
+                            <select class="form-select" id="specialtySelect"
+                                aria-label="Floating label select specialty's doctor">
+                                <option selected>Selecciona l'especialització</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <label for="plantaSelect">Planta de la consulta</label>
+                        </div>
+                        <!-- Localització  -->
+                        <div class="form-floating consulta-div">
+                            <select class="form-select" id="plantaSelect"
+                                aria-label="Floating label select consultation's doctor">
+                                <option selected>Selecciona la planta</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <label for="plantaSelect">Planta de la consulta</label>
+                        </div>
+                        <!-- Consulta  -->
+                        <div class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
+                            <input type="specialty" class="form-control" id="specialityInput"
+                                placeholder="Consulta de la persona">
+                            <label for="specialityInput">Número de la consulta</label>
+                        </div>
+                        <!-- Tancar / Afegir canvis  -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tanca</button>
+                            <button type="button" class="btn btn-primary">Afegeix</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- <table class="table">
+
+    <div>
+        
+        <!-- <table class="table">
             <thead class="container px-4 text-center">
                 <th>Nom</th>
                 <th>Cognom</th>
@@ -189,4 +465,5 @@ $query = mysqli_query($conn, $sql);
 include(__DIR__ . '/footer.php');
 
 ?>
+
 </html>
