@@ -8,11 +8,40 @@ VALUES
 
 INSERT INTO `locations` (`floor`, `room`, `created_at`, `hidden`)
 VALUES 
-('1', 102, NOW(), false),
-('2', 201, NOW(), false),
-('2', 202, NOW(), false),
-('3', 301, NOW(), false),
-('3', 302, NOW(), false);
+('0', 1, NOW(), false),
+('0', 2, NOW(), false),
+('0', 3, NOW(), false),
+('0', 4, NOW(), false),
+('0', 5, NOW(), false),
+('0', 6, NOW(), false),
+('0', 7, NOW(), false),
+('0', 8, NOW(), false),
+('0', 9, NOW(), false),
+('0', 10, NOW(), false),
+('0', 11, NOW(), false),
+('0', 12, NOW(), false),
+('0', 13, NOW(), false),
+('0', 14, NOW(), false),
+('0', 15, NOW(), false),
+
+('1', 16, NOW(), false),
+('1', 17, NOW(), false),
+('1', 18, NOW(), false),
+('1', 19, NOW(), false),
+('1', 20, NOW(), false),
+('1', 21, NOW(), false),
+('1', 22, NOW(), false),
+('1', 23, NOW(), false),
+('1', 24, NOW(), false),
+('1', 25, NOW(), false),
+('1', 26, NOW(), false),
+
+('4', 28, NOW(), false),
+('4', 29, NOW(), false),
+('4', 30, NOW(), false),
+('4', 31, NOW(), false);
+
+
 
 INSERT INTO `doctors` (`name`, `surname`, `location_id`, `created_at`, `hidden`)
 VALUES 

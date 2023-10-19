@@ -2,13 +2,19 @@
 
 include(__DIR__ . '/connect.php');  
 
+// Info bàsica
 $name = $_POST['Nom'];
 $surname = $_POST['Cognom'];
 $location_id = $_POST['id_localitzacio'];
+$type_specialty = $_POST['TipusEspecialitat'];
+
+//Info a enllaçar
+$floor = $_POST['Planta'];
+$room = $_POST['Consulta'];
 $hidden = 0;
 
 
-// Sentència preparada
+// Sentència preparada -- Info bàsoca
 $stmt = $conn->prepare("INSERT INTO doctors (name, surname, location_id, hidden) VALUES (?, ?, ?, ?)");
 if ($stmt === false) {
     die("Error: " . $conn->error);
@@ -24,13 +30,7 @@ if($result) {
 }
 
 
-// 1. Crear una altra sentència
 
-// 1.1 Recollir les dades del formulari
-
-// 1.2 Transformar els noms per les id ex; id_especulització (1 = dermatología)
-
-// 1.3 Repetir el mateix procés però amb localització
 
 $stmt->close();
 $conn->close();
