@@ -14,13 +14,14 @@ VALUES
 ('3', 301, NOW(), false),
 ('3', 302, NOW(), false);
 
-INSERT INTO `doctors` (`name`, `surname`, `location_id`, `created_at`, `hidden`)
+INSERT INTO `doctors` (`name`, `surname`, `specialty_id`, `location_id`, `created_at`, `hidden`)
 VALUES 
-('Mary', 'Smith', 2, NOW(), false),
-('James', 'Johnson', 3, NOW(), false),
-('Patricia', 'Williams', 4, NOW(), false),
-('Michael', 'Brown', 5, NOW(), false),
-('Linda', 'Taylor', 5, NOW(), false);
+('Mary', 'Smith', 1, 2, NOW(), false),
+('James', 'Johnson', 1, 3, NOW(), false),
+('Patricia', 'Williams', 2, 4, NOW(), false),
+('Michael', 'Brown', 2, 5, NOW(), false),
+('Linda', 'Taylor', 1, 5, NOW(), false);
+
 
 INSERT INTO `doctor_specialty` (`doctor_id`, `specialty_id`, `created_at`, `hidden`)
 VALUES 
@@ -32,11 +33,11 @@ VALUES
 
 INSERT INTO `schedules` (`doctor_id`, `day`, `shift`, `created_at`, `hidden`)
 VALUES 
-(1, 'Monday', 'morning', NOW(), false),
-(2, 'Tuesday', 'afternoon', NOW(), false),
-(3, 'Wednesday', 'morning', NOW(), false),
-(4, 'Thursday', 'afternoon', NOW(), false),
-(5, 'Friday', 'morning', NOW(), false);
+(1, 'monday', 'morning', NOW(), false), 
+(2, 'tuesday', 'afternoon', NOW(), false), 
+(3, 'wednesday', 'morning', NOW(), false), 
+(4, 'tuesday', 'afternoon', NOW(), false), 
+(5, 'friday', 'morning', NOW(), false);
 
 INSERT INTO `users` (`username`, `role`, `created_at`, `hidden`)
 VALUES 

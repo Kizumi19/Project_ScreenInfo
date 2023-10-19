@@ -5,11 +5,13 @@
 include(__DIR__ . '/connect.php');
 include(__DIR__ . '/header.php');
 include(__DIR__ . '/select.php');
-mysqli_set_charset($conn, "utf8mb4");
+mysqli_set_charset($conn, 'utf8mb4');
 
 $query = mysqli_query($conn, $sql);
 $queryM = mysqli_query($conn, $sqlMorning);
 $queryT = mysqli_query($conn, $sqlAfternoon);
+
+mysqli_set_charset($conn, 'utf8mb4');
 
 
 ?>
@@ -39,7 +41,6 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
             <h1>Formulari</h1>
             <input type="text" name="Nom" placeholder="Nom">
             <input type="text" name="Cognom" placeholder="Cognom">
-            <input type="text" name="id_especialitat" placeholder="Especialitat">
             <input type="text" name="id_localitzacio" placeholder="Localització">
 
             <input id="submitBtn" type="submit" value="Send "></input>
