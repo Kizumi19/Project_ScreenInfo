@@ -1,7 +1,7 @@
 CREATE TABLE `schedules` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `doctor_id` int NOT NULL,
-  `day` ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
+  `day` ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday') NOT NULL,
   `shift` ENUM ('morning', 'afternoon') NOT NULL,
   `created_at` timestamp,
   `hidden` boolean
@@ -25,11 +25,10 @@ CREATE TABLE `locations` (
 ) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE `doctors` (
-  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `surname` varchar(255) NOT NULL,
-  `specialty_id` int NOT NULL,
-  `location_id` int NOT NULL,
+  `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `name` varchar(255),
+  `surname` varchar(255),
+  `location_id` integer,
   `created_at` timestamp,
   `hidden` boolean
 ) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
@@ -51,7 +50,6 @@ CREATE TABLE `doctor_specialty` (
 
 
 ALTER TABLE `schedules` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`);
-ALTER TABLE `doctors` ADD FOREIGN KEY (`specialty_id`) REFERENCES `specialties` (`id`);
 ALTER TABLE `doctors` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 ALTER TABLE `doctor_specialty` ADD FOREIGN KEY (`specialty_id`) REFERENCES `specialties` (`id`);
 ALTER TABLE `doctor_specialty` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`);

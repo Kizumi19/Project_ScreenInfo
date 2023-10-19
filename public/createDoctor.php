@@ -7,9 +7,6 @@ $surname = $_POST['Cognom'];
 $location_id = $_POST['id_localitzacio'];
 $hidden = 0;
 
-// if ($location_id = 1){
-    
-// }
 
 // Sentència preparada
 $stmt = $conn->prepare("INSERT INTO doctors (name, surname, location_id, hidden) VALUES (?, ?, ?, ?)");
