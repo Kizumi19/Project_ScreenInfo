@@ -11,9 +11,6 @@ $query = mysqli_query($conn, $sql);
 $queryM = mysqli_query($conn, $sqlMorning);
 $queryT = mysqli_query($conn, $sqlAfternoon);
 
-mysqli_set_charset($conn, 'utf8mb4');
-
-
 ?>
 
 <head>
