@@ -29,19 +29,7 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
 </head>
 
 <body>
-    <header>
-
-    </header>
-    <div>
-        <form method="POST" action="createDoctor.php">
-            <h1>Formulari</h1>
-            <input type="text" name="Nom" placeholder="Nom">
-            <input type="text" name="Cognom" placeholder="Cognom">
-            <input type="text" name="id_localitzacio" placeholder="Localització">
-
-            <input id="submitBtn" type="submit" value="Send "></input>
-        </form>
-    </div>
+    <h1>Formulari</h1>
 
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
@@ -94,7 +82,7 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                     </button>
 
                     <!-- Modal -->
-                    <form method="POST" action="createDoctor.php">
+                    <form class="needs-validation" method="POST" action="createDoctor.php">
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -114,7 +102,7 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                         </div>
                                         <!-- Cognom -->
                                         <div class="form-floating mb-3">
-                                            <input type="surname" class="form-control" id="surnameInput"
+                                            <input type="surname" name="Cognom" class="form-control" id="surnameInput"
                                                 placeholder="Cognoms de la persona">
                                             <label for="surnameInput">Cognoms</label>
                                         </div>
@@ -133,8 +121,116 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                                     </option>
                                                 <?php endwhile; ?>
                                             </select>
-                                            <label for="plantaSelect">Planta de la consulta</label>
+                                            <label for="plantaSelect">Especialització del doctor/a</label>
                                         </div>
+
+                                        <!-- Torn  -->
+                                        <?php
+                                        $shift = "SELECT `shift` FROM `schedules`";
+                                        $queryShift = mysqli_query($conn, $shift);
+                                        if (!$queryShift) {
+                                            die("Query failed: " . mysqli_error($conn));
+                                        }
+
+                                        ?>
+                                        <!-- <div
+                                            class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
+                                            <select class="form-select">
+                                                <?php
+                                                while ($row = mysqli_fetch_array($queryShift)): ?>
+                                                    <option value="<?= $row['shift'] ?>">
+                                                        <?= $row['shift'] ?>
+                                                    </option>
+                                                <?php endwhile; ?>
+                                            </select>
+                                            <label for="tornSelect">Torn que farà (de matí, de tarde o tots dos)</label>
+                                        </div> -->
+                                        <div
+                                            class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
+                                            <select class="form-select">
+                                                <option name="Torn" value="<?= $row['shift'] ?>">
+                                                    Matí
+                                                </option>
+                                                <option name="Torn" value="<?= $row['shift'] ?>">
+                                                    Tarde
+                                                </option>
+                                                <option name="Torn" value="<?= $row['shift'] ?>">
+                                                    Matí i tarde
+                                                </option>
+                                            </select>
+                                            <label for="tornSelect">Torn que farà (de matí, de tarde o tots dos)</label>
+                                        </div>
+
+                                        <!-- Dia  -->
+                                        <!-- <div class="form-floating form-check form-check-inline">
+                                            <input name="Dia" class="form-check-input" type="checkbox"
+                                                id="inlineCheckbox1" value="<?= $day ?>">
+                                            <label class="form-check-label" for="inlineCheckbox1">Dilluns</label>
+                                        </div> -->
+                                        
+                                        <div id="days-container">
+
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox1" value="Dilluns">
+                                                <label class="form-check-label" for="inlineCheckbox1">Dilluns</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox2" value="Dimarts">
+                                                <label class="form-check-label" for="inlineCheckbox2">Dimarts</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox3" value="Dimecres">
+                                                <label class="form-check-label" for="inlineCheckbox3">Dimecres</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox4" value="Dijous">
+                                                <label class="form-check-label" for="inlineCheckbox4">Dijous</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox5" value="Divendres">
+                                                <label class="form-check-label" for="inlineCheckbox5">Divendres</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox6" value="Dissabte">
+                                                <label class="form-check-label" for="inlineCheckbox6">Dissabte</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="Dia" class="form-check-input" type="checkbox"
+                                                    id="inlineCheckbox7" value="Diumenge" disabled>
+                                                <label class="form-check-label" for="inlineCheckbox7" >Diumenge</label>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+                                        <!-- onchange="ChangeList()" -->
+                                        <!-- Aquí está tu toast (mensaje) -->
+                                        
+                                        <div class="toast" style="position: absolute; top: 0; right: 0;" role="alert"
+                                            aria-live="assertive" aria-atomic="true" id="myToast">
+                                            <div class="toast-body" role="alert" aria-live="assertive"
+                                                aria-atomic="true">
+                                                ⚠️ Compte! El doctor/a vindrà els dies que has seleccionat durant el
+                                                <strong>TORN</strong> que has seleccionat.
+                                            </div>
+                                            <div class="mt-2 pt-2 border-top">
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    data-bs-dismiss="toast">Entesos!
+                                                </button>
+                                                <button type="button" id="toastEl" class="btn btn-secondary btn-sm"
+                                                    data-bs-dismiss="toast" aria-label="No mostrar de nou">
+                                                    No mostrar de nou
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                        <div class="mt-3"></div>
+
                                         <!-- Localització  -->
                                         <?php
                                         $floor = "SELECT floor from locations";
@@ -159,10 +255,10 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                         <div
                                             class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
                                             <select name="Consulta" id="consultaSelect" class="form-select">
-                                                <!-- Los números de las consultas irán aquí -->
                                             </select>
                                             <label for="consultaSelect">Número de la consulta</label>
                                         </div>
+
 
                                         <!-- Tancar / Afegir canvis  -->
                                         <div class="modal-footer">
@@ -371,13 +467,13 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                     <!-- Nom -->
                                     <div class="form-floating mb-3">
                                         <input type="name" class="form-control" id="nameInput"
-                                            placeholder="Nom de la persona">
+                                            placeholder="Nom de la persona" required>
                                         <label for="nameInput">Nom</label>
                                     </div>
                                     <!-- Cognom -->
                                     <div class="form-floating mb-3">
                                         <input type="surname" class="form-control" id="surnameInput"
-                                            placeholder="Cognoms de la persona">
+                                            placeholder="Cognoms de la persona" required>
                                         <label for="surnameInput">Cognoms</label>
                                     </div>
                                     <!-- Especialitat -->
@@ -387,7 +483,7 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                     ?>
                                     <div class="form-floating consulta-div">
                                         <select class="form-select" id="specialtySelect"
-                                            aria-label="Floating label select specialty's doctor">
+                                            aria-label="Floating label select specialty's doctor" required>
                                             <option selected>Selecciona l'especialització</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -399,9 +495,9 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                     </div>
                                     <!-- Localització  -->
                                     <div class="form-floating consulta-div">
-                                        <select class="form-select" id="plantaSelect"
+                                        <select class="form-select" name="Planta" id="plantaSelect"
                                             aria-label="Floating label select consultation's doctor">
-                                            <option selected>Selecciona la planta</option>
+                                            <option selected required>Selecciona la planta</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -412,8 +508,8 @@ $queryT = mysqli_query($conn, $sqlAfternoon);
                                     </div>
                                     <!-- Consulta  -->
                                     <div class="form-floating mb-3; border-collapse: separate; border-spacing: 5px;">
-                                        <input type="specialty" class="form-control" id="specialityInput"
-                                            placeholder="Consulta de la persona">
+                                        <input type="Consulta" class="form-control" id="specialityInput"
+                                            placeholder="Consulta de la persona" required>
                                         <label for="specialityInput">Número de la consulta</label>
                                     </div>
                                     <!-- Tancar / Afegir canvis  -->
@@ -447,7 +543,7 @@ while ($row = mysqli_fetch_assoc($queryF)) {
     $floor = $row['floor'];
     $room_query = "SELECT room FROM locations WHERE floor = '$floor'";
     $queryR = mysqli_query($conn, $room_query);
-    
+
     $rooms = [];
     while ($room_row = mysqli_fetch_assoc($queryR)) {
         $rooms[] = $room_row['room'];
@@ -463,15 +559,15 @@ while ($row = mysqli_fetch_assoc($queryF)) {
         var floorList = document.getElementById("plantaSelect");
         var roomList = document.getElementById("consultaSelect");
         var selectedFloor = floorList.options[floorList.selectedIndex].value;
-        
+
         // Limpiar existents opcions
         while (roomList.options.length) {
             roomList.remove(0);
         }
-        
+
         // Obtenir les habitacions corresponents a la planta seleccionada
         var rooms = floorsAndRooms[selectedFloor];
-        
+
         if (rooms) {
             for (var i = 0; i < rooms.length; i++) {
                 var roomOption = new Option(rooms[i], rooms[i]);
@@ -479,4 +575,54 @@ while ($row = mysqli_fetch_assoc($queryF)) {
             }
         }
     }
+
+    // Validació per al formulari
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+    // Per poder mostrar un missatge d'ajuda per a l'usuari al moment que cliqui el dia de la setmana:
+    //Entesos!
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        const toast = new bootstrap.Toast(document.getElementById('myToast'));
+        let toastHide = false;
+        const buttonHide = document.getElementById('toastEl');
+
+        buttonHide.addEventListener('click', function () {
+            toastHide = true;
+        });
+
+        if (toastHide === false) {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('click', function () {
+                    toast.show();
+                });
+            });
+        } else {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('click', function () {
+                    toast.dispose();
+                });
+            });
+        }
+    });
+
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 </script>
