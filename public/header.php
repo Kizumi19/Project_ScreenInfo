@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<?php
-include(__DIR__ . '/connect.php');
-$sql = "SELECT * FROM doctors";
-$query = mysqli_query($conn, $sql);
-
-$request = $_SERVER["REQUEST_URI"];
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
